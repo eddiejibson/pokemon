@@ -1,0 +1,12 @@
+/* Regular and bold */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  outline: 0 !important;
+  background: #313339;
+  color: #bdc3c7;
+}
