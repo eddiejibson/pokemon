@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'universal',
   head: {
-    title: "Pokémon UI",
+    title: "PokéAPI UI",
     meta: [{
         charset: 'utf-8'
       },
