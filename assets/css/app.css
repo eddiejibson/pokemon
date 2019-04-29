@@ -39,7 +39,7 @@ body {
 }
 
 .flex-wrap {
-  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
 }
