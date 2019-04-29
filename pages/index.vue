@@ -26,7 +26,7 @@
 margin-right: 5px;margin-bottom:10px;display:none"
       >
         <div class="card" style="width:100%;">
-          <Loading msg="Loading More..." />
+          <Loading msg="Loading More Pokemons..." />
         </div>
       </div>
     </div>
@@ -45,6 +45,10 @@ export default {
   },
   methods: {
     async loadMoreResults() {
+      if (this.error) {
+        //If an existing error, I'm not going to process again
+        return;
+      }
       let res = await this.$processGet(
         `/pokemon/?limit=15&offset=${this.offset}`
       ).catch(err => {
@@ -64,7 +68,6 @@ export default {
     //Default obj, regardless of request status
     let obj = {
       offset: 15, //How many pokemons have already been rendered (need this so on next request it gets the right ones)
-      loadingRequest: false,
       pokemons: false,
       error: true
     };

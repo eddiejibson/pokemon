@@ -16,6 +16,38 @@ body {
   width: 50%;
 }
 
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  padding: 8px;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.3s ease-in-out;
+  text-align: center;
+  transform-origin: top;
+  background: #222226;
+  color: #fff;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+[data-tooltip]:hover:before {
+  transform: translateX(-50%) scale(1);
+}
+
+.tooltip--top:before {
+  top: -35px;
+  bottom: auto;
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -115,12 +147,14 @@ body {
 
 .card h1 {
   margin-bottom: 10px;
-  text-transform: capitalize;
+
 }
 
-h1 {
+h1,
+.bold {
   font-weight: 700;
   color: #fff;
+  text-transform: capitalize;
 }
 
 .row {
