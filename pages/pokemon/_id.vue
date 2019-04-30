@@ -5,13 +5,12 @@
       <h1 class="center-text">{{ pokemon.name }}</h1>
     </div>
     <div class="inner-container">
-      <div
-        class="row"
-        style="margin-left: 5px;
-margin-right: 5px;"
-      >
+      <div class="row">
         <div class="card">
-          <div class="row row-no-center">
+          <div
+            class="row row-no-center row-small"
+            style="margin-left:0px!important;"
+          >
             <img
               class="pokemon"
               :src="
@@ -20,7 +19,7 @@ margin-right: 5px;"
                   '.png'
               "
             />
-            <div class="thumb-padding-acc">
+            <div class="info-container">
               <p>
                 <span class="bold">Weight:</span>
                 {{ pokemon.weight / 10 + "kg" || "Unknown" }}
@@ -41,6 +40,20 @@ margin-right: 5px;"
                 >
                   {{ type.type.name }}
                 </span>
+              </div>
+              <div
+                class="row top space-between"
+                v-for="stat in pokemon.stats"
+                :key="stat"
+              >
+                <p class="bold temp-padding">
+                  {{ stat.stat.name.replace("-", " ") }}:
+                </p>
+                <div class="full-bar">
+                  <div class="bar" :style="{ width: stat.base_stat + '%' }">
+                    <span>{{ stat.base_stat }}%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -91,7 +104,9 @@ export default {
   width: 100% !important;
 }
 .pokemon {
-  width: 250px !important;
+  width: 250px;
+  height: 250px;
+  margin-right: 20px;
 }
 
 .label {
@@ -99,14 +114,41 @@ export default {
   margin-right: 5px;
 }
 .top {
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
-.row-no-center {
-  align-items: normal !important;
+.temp-padding {
+  margin-right: 10px;
 }
 
-.thumb-padding-acc {
-  margin-top: 20px;
+.inner-container {
+  width: auto !important;
+}
+
+.card {
+  width: 50%;
+}
+
+@media only screen and (max-width: 670px) {
+  .row-small {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .pokemon {
+    margin: 0 !important;
+    width: 200px;
+    height: 200px;
+  }
+
+  .full-bar {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .full-bar {
+    width: 150px !important;
+  }
 }
 </style>
