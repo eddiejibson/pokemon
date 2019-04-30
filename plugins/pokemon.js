@@ -26,12 +26,56 @@ export const getThumbIndex = (index) => {
   } else {
     return String(index);
   }
-
 }
+
+export const getFavourites = () => {
+  let favourites = localStorage.getItem("favourites");
+  if (!favourites) {
+    return false;
+  } else {
+    return JSON.parse(favourites);
+  }
+}
+
+export const saveFavourite = ({
+  id,
+  name
+}) => {
+  let index = String(id); //Array won't be ints now and thus wont be sorted as such
+  let favourites = getFavourites() || [];
+  if (favourites.length <= 0) {
+    let obj = {};
+    obj[index] = {
+      name: name
+    }
+    favourites.push(obj);
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+    return {
+      success: true
+    }
+  } else if (!favourites[0][index]) {
+    favourites[0][index] = {
+      name: name
+    };
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+    return {
+      success: true
+    }
+  } else {
+    return {
+      error: "You've already saved this Pokémon to your favourites!"
+    }
+  }
+}
+
+
+
 
 vue.use((vm) => {
   vm.prototype.$processGet = processGet;
   vm.prototype.$getThumbIndex = getThumbIndex;
+  vm.prototype.$getFavourites = getFavourites;
+  vm.prototype.$saveFavourite = saveFavourite;
 });
 
 export default ({

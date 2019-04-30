@@ -44,34 +44,34 @@
                 <span
                   class="label"
                   :class="[type.type.name]"
-                  v-for="type in pokemon.types"
-                  :key="type"
+                  v-for="(type, index) in pokemon.types"
+                  :key="index"
                 >
                   {{ type.type.name }}
                 </span>
               </div>
               <div
                 class="row top space-between"
-                v-for="stat in pokemon.stats"
-                :key="stat"
+                v-for="(stat, index) in pokemon.stats"
+                :key="index"
               >
                 <p class="bold temp-padding">
                   {{ stat.stat.name.replace("-", " ") }}:
                 </p>
                 <div class="full-bar">
                   <div class="bar" :style="{ width: stat.base_stat + '%' }">
-                    <span>{{ stat.base_stat }}%</span>
+                    <span>{{ stat.base_stat }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="pokemon-options row space-between">
+          <div class="pokemon-options row space-between row-small">
             <span class="row option"
               ><shuffle w="14" h="14" rootClass="option-icon" />
               <p>Compare with another Pokemon</p></span
             >
-            <span class="row reverse option">
+            <span class="row reverse option bottom" @click="favourite()">
               <heart w="14" h="14" rootClass="option-icon" />
               <p>Add to your favourites</p>
             </span>
@@ -95,6 +95,9 @@ export default {
   methods: {
     travel(destination) {
       this.$router.push(destination);
+    },
+    favourite() {
+      this.$saveFavourite(this.pokemon);
     }
   },
   //I have the params key passed here, too. This way I can extract the ID from the URL.
@@ -194,10 +197,27 @@ export default {
   margin-right: 3px;
 }
 
+.bottom {
+  margin-top: 0px;
+}
+
 @media only screen and (max-width: 670px) {
   .row-small {
     flex-direction: column !important;
     align-items: center !important;
+  }
+
+  .row .reverse {
+    flex-direction: row !important;
+  }
+
+  .bottom {
+    margin-top: 7px;
+  }
+
+  .row .reverse .option-icon {
+    margin-left: 0px;
+    margin-right: 3px !important;
   }
 
   .pokemon {
