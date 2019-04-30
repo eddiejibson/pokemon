@@ -29,7 +29,7 @@ module.exports = {
     "@/assets/css/app.css"
   ],
 
-  //The only plugin that will be imported is the pokeapi.js which is effectively a wrapper I wrote myself
+  //The only plugin that will be imported is the pokeapi.js which is effectively a very simple wrapper to handle API requests that I wrote myself
   plugins: ["@/plugins/pokemon.js"],
 
   //The only module that will be imported is axios - I find this best for handling requests and slightly easier than using just plain XHR.

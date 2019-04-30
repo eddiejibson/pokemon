@@ -1,4 +1,4 @@
-//Simple wrapper for the API and various other functions that are required globally.
+//Very simple wrapper to handle API requests (and other tasks that are required globally) that I wrote myself
 import vue from "vue"; //So I can export the functions into the vue vm 
 import axios from "axios";
 const api = "https://pokeapi.co/api/v2"; //Now when the only thing that needs to be passed into the processGet function is the endpoint and not the whole URL. It also means it can easily be changed later.

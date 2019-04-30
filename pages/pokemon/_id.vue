@@ -11,7 +11,7 @@
 margin-right: 5px;"
       >
         <div class="card">
-          <div class="row">
+          <div class="row row-no-center">
             <img
               class="pokemon"
               :src="
@@ -20,15 +20,28 @@ margin-right: 5px;"
                   '.png'
               "
             />
-            <div>
+            <div class="thumb-padding-acc">
               <p>
                 <span class="bold">Weight:</span>
                 {{ pokemon.weight / 10 + "kg" || "Unknown" }}
               </p>
-              <p>
-                <span class="bold">Type(s):</span>
-                {{ pokemon.types }}
+              <p class="top">
+                <span class="bold">Height:</span>
+                {{ pokemon.height / 10 + "m" || "Unknown" }}
               </p>
+              <div class="row top">
+                <p class="bold">
+                  Types:
+                </p>
+                <span
+                  class="label"
+                  :class="[type.type.name]"
+                  v-for="type in pokemon.types"
+                  :key="type"
+                >
+                  {{ type.type.name }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -56,20 +69,19 @@ export default {
       };
     } else {
       let pokemon = res.data;
-      let types = [];
-      for (let i = 0; i < pokemon.types.length; i++) {
-        let el = pokemon.types[i];
-        types.push(
-          el.type.name.charAt(0).toUpperCase() + el.type.name.slice(1) //Capitalize first character of the type
-        );
-      }
-      pokemon.types = types.join();
+      pokemon.name =
+        pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1); //Normally rely on just CSS for making sure the first character is in caps, but need this for the title
       return {
         pokemon: pokemon,
         thumbIndex: app.$getThumbIndex(params.id),
         error: false
       };
     }
+  },
+  head() {
+    return {
+      title: `${this.pokemon.name} • PokéAPI UI`
+    };
   }
 };
 </script>
@@ -79,6 +91,22 @@ export default {
   width: 100% !important;
 }
 .pokemon {
-  width: 250px;
+  width: 250px !important;
+}
+
+.label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.top {
+  margin-top: 5px;
+}
+
+.row-no-center {
+  align-items: normal !important;
+}
+
+.thumb-padding-acc {
+  margin-top: 20px;
 }
 </style>
