@@ -2,6 +2,8 @@
 
 > Simple UI utilizing some of Pokéapi&#39;s endpoints
 
+[Live version here](https://pokemon.jibson.me)
+
 For this project, I used [NuxtJS](https://nuxtjs.org/) which is effectively VueJS with added features such as Server Side Rendering which is handy for SEO purposes. I made sure to also use vanilla Javascript in manipulating the DOM - to prove I'm not limited just to Vue. This may have looked strange in some places as it wasn't needed, but there was a reason behind it. The only other dependencies used were [Axios](https://github.com/axios/axios) which was used for retrieving data from the API endpoints provided (I'm aware I could have used vanilla XHR within JavaScript, but chose this simply for ease) and [Ionicons](https://ionicons.com/) which isn't a library as such and basically provides the SVG icons I used. **No CSS frameworks have been used at all**.
 
 ## Pages
