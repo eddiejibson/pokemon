@@ -8,7 +8,7 @@ For this project, I used [NuxtJS](https://nuxtjs.org/) which is effectively VueJ
 
 ## Pages
 
-`pages/index.vue` [/] - Allows user to browse Pokémon. Will intially fetch 15 Pokémon and render on the server (service side rendering). Then, upon a user's scroll to the bottom of the page, an additional 15 Pokémons will load (and so on). In the event a user clicks on a Pokémon card, they will be transported to a more advanced card (with the statistics and such).
+`pages/index.vue` [/] - Allows user to browse Pokémon. Will intially fetch 15 Pokémon and render on the server (server side rendering). Then, upon a user's scroll to the bottom of the page, an additional 15 Pokémons will load (and so on). In the event a user clicks on a Pokémon card, they will be transported to a more advanced card (with the statistics and such).
 
 `pages/pokemon/_id.vue` [/pokemon/id] (where _id is the index of the Pokémon being viewed) - This will display one card with the specified Pokémon's information (statistics and the like). As well as this, it also displays various options to favourite the current Pokémon or compare it with another. On favourite of a pokemon, they can also remove such here, too.
 
