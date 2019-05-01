@@ -1,0 +1,8 @@
+{
+  "apps": [{
+    "name": "pokemon_front",
+    "script": "./node_modules/nuxt-start/bin/nuxt-start",
+    "instances": "max",
+    "exec_mode": "cluster"
+  }]
+}
