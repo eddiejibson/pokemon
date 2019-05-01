@@ -3,7 +3,6 @@ import vue from "vue"; //So I can export the functions into the vue vm
 import axios from "axios";
 const api = "https://pokeapi.co/api/v2"; //Now when the only thing that needs to be passed into the processGet function is the endpoint and not the whole URL. It also means it can easily be changed later.
 
-
 export const processGet = async (endpoint) => {
   let url = `${api}${endpoint}`;
   let res = await axios.get(url).catch((err) => {
@@ -64,16 +63,12 @@ export const removeFavourite = ({
   let index = String(id);
   let favourites = getFavourites() || [];
   if (favourites.length > 0) {
-    console.log(favourites[0][index]);
     if (favourites[0][index]) {
       delete favourites[0][index];
     }
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }
 }
-
-
-
 
 vue.use((vm) => {
   vm.prototype.$processGet = processGet;

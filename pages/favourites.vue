@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row header">
       <img src="icons/192.png" />
-      <h1 class="center-text">My Favourites</h1>
+      <h1 class="center-text">My Favourite Pokémon</h1>
     </div>
 
     <div class="inner-container stretch">
@@ -22,9 +22,11 @@
 
 <script>
 import pokemonCard from "~/components/pokemonCard.vue";
+import arrow from "vue-ionicons/dist/md-arrow-back.vue";
 export default {
   components: {
-    pokemonCard
+    pokemonCard,
+    arrow
   },
   //Not async as it will not be subject to SSR.
   data() {

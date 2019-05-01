@@ -36,7 +36,7 @@
           </span>
         </div>
         <div
-          class="row top space-between"
+          class="row top space-between row-small"
           v-for="(stat, index) in pokemon.stats"
           :key="index"
         >
@@ -51,8 +51,8 @@
         </div>
       </div>
     </div>
-    <div class="pokemon-options row space-between row-small">
-      <span class="row option"
+    <div class="pokemon-options row space-between row-small" v-if="!two">
+      <span class="row option" @click="travel('/?comparison=' + pokemon.name)"
         ><shuffle w="14" h="14" rootClass="option-icon" />
         <p>Compare with another Pokemon</p></span
       >
@@ -107,7 +107,11 @@ export default {
   },
   props: {
     pokemon: Object,
-    thumbIndex: String
+    thumbIndex: String,
+    two: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -115,6 +119,9 @@ export default {
     };
   },
   methods: {
+    travel(destination) {
+      this.$router.push(destination);
+    },
     //Is method because I'm calling both if the user clicks to add or if it has already been added
     showAddedToFavourite(showSuccess = true) {
       //Again, I'm aware I could use v-if, just wanted to show  I can manipulate the DOM in vanilla javascript and without the use of a framework.
@@ -155,13 +162,14 @@ export default {
     }
   },
   mounted() {
-    let favourites = this.$getFavourites(); //Get favourites from localStorage
-    if (favourites) {
-      favourites = favourites[0];
-      console.log(favourites);
-      if (favourites[this.pokemon.id]) {
-        //If ID exists, the user has saved it to their favourites. Reflect this in the UI. Do not show the success "added to your favourites" - so pass in false.
-        this.showAddedToFavourite(false);
+    if (!this.two) {
+      let favourites = this.$getFavourites(); //Get favourites from localStorage
+      if (favourites) {
+        favourites = favourites[0];
+        if (favourites[this.pokemon.id]) {
+          //If ID exists, the user has saved it to their favourites. Reflect this in the UI. Do not show the success "added to your favourites" - so pass in false.
+          this.showAddedToFavourite(false);
+        }
       }
     }
   }
@@ -170,7 +178,11 @@ export default {
 
 <style scoped>
 .card {
-  width: 100% !important;
+  width: auto !important;
+  margin-top: 0px !important;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .pokemon {
   width: 250px;
@@ -210,18 +222,8 @@ export default {
   margin-right: 10px;
 }
 
-.inner-container {
-  width: auto !important;
-}
-
 .card {
   width: 50%;
-}
-
-.back-icon {
-  height: 13px;
-  width: 13px;
-  margin-right: 3px;
 }
 
 .bottom {
@@ -232,6 +234,11 @@ export default {
   .row-small {
     flex-direction: column !important;
     align-items: center !important;
+  }
+
+  .full-bar {
+    width: 100%;
+    margin-top: 5px !important;
   }
 
   .row .reverse {
@@ -255,12 +262,6 @@ export default {
 
   .full-bar {
     margin: 0;
-  }
-}
-
-@media only screen and (max-width: 390px) {
-  .full-bar {
-    width: 150px !important;
   }
 }
 

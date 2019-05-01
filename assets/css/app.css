@@ -1,7 +1,6 @@
 /* Regular and bold */
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 
-
 html,
 body {
   padding: 0;
@@ -27,39 +26,6 @@ body {
   .stretch {
     width: 98% !important;
   }
-}
-
-
-[data-tooltip] {
-  position: relative;
-}
-
-[data-tooltip]:before {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: -35px;
-  left: 50%;
-  padding: 8px;
-  transform: translateX(-50%) scale(0);
-  transition: transform 0.3s ease-in-out;
-  text-align: center;
-  transform-origin: top;
-  background: #222226;
-  color: #fff;
-  border-radius: 2px;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-[data-tooltip]:hover:before {
-  transform: translateX(-50%) scale(1);
-}
-
-.tooltip--top:before {
-  top: -35px;
-  bottom: auto;
-  transform: translateX(-50%) scale(0);
-  transform-origin: bottom center;
 }
 
 .container {
@@ -320,12 +286,6 @@ h1,
   vertical-align: middle;
 }
 
-.above-card {
-  font-size: 13px;
-  margin: 0px 0px 3px 0px;
-  color: #bdc3c7;
-  fill: #bdc3c7;
-}
 
 .above-card:hover {
   color: #fff;
@@ -337,8 +297,17 @@ h1,
   margin: 0;
 }
 
-
+.back-icon {
+  height: 13px;
+  width: 13px;
+  margin-right: 3px;
+}
 
 .row .reverse {
   flex-direction: row-reverse;
+}
+
+
+.info-container {
+  width: 100%;
 }

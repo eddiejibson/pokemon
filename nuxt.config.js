@@ -1,4 +1,7 @@
 module.exports = {
+  server: {
+    port: 8090
+  },
   mode: 'universal',
   head: {
     title: "PokéAPI UI",

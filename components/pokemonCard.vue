@@ -30,7 +30,8 @@ export default {
       //Should send query param to advanced card where from so instead of "back to browse", you can go back to favourite list instead
       type: Boolean,
       default: false
-    }
+    },
+    comparison: String
   },
   data() {
     return {
@@ -39,6 +40,11 @@ export default {
   },
   methods: {
     travel(destination) {
+      if (this.comparison) {
+        destination = `/pokemon/${this.comparison.toLowerCase()}?comparison=${
+          this.index
+        }`;
+      }
       if (this.favourite) {
         destination += "?from=favourites";
       }
@@ -54,5 +60,9 @@ export default {
 <style scoped>
 .card {
   cursor: pointer !important;
+}
+
+.card:hover {
+  border: 1px solid #e74c3c;
 }
 </style>
