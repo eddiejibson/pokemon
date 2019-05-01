@@ -40,7 +40,7 @@ export const saveFavourite = ({
   id,
   name
 }) => {
-  let index = String(id); //Array won't be ints now and thus wont be sorted as such
+  let index = String(id); //key won't be ints now and thus wont be sorted as such
   let favourites = getFavourites() || [];
   if (favourites.length <= 0) {
     let obj = {};
