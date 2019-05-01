@@ -2,10 +2,24 @@
   <div class="container">
     <div class="row header">
       <img src="icons/192.png" />
-      <h1 class="center-text">My Favourite Pokémon</h1>
+      <h1 class="center-text">Favourite Pokémon</h1>
     </div>
 
     <div class="inner-container stretch">
+      <div
+        class="row"
+        style="margin-top: 10px;margin-left:5px;margin-right:5px;"
+      >
+        <div class="card" style="width:100%;" v-if="!pokemons">
+          <p class="center-text">
+            You don't have any favourite Pokémon yet... Maybe it's time
+            <nuxt-link to="/" style="color:#c0392b;text-decoration:none;"
+              >you browsed</nuxt-link
+            >
+            and found some?
+          </p>
+        </div>
+      </div>
       <!-- only show if pokemons have been retrieved -->
       <div class="flex-wrap" v-if="pokemons">
         <pokemonCard
@@ -36,9 +50,15 @@ export default {
   },
   mounted() {
     let favourites = this.$getFavourites(); //Get favourites from localStorage
-    if (favourites) {
+    if (favourites && favourites[0]) {
       favourites = favourites[0];
-      this.pokemons = favourites;
+      if (Object.keys(favourites).length <= 0) {
+        this.pokemons = false;
+      } else {
+        this.pokemons = favourites;
+      }
+    } else {
+      this.pokemons = false;
     }
   }
 };

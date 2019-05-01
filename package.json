@@ -1,6 +1,6 @@
 {
   "name": "pokemon",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Simple UI utilizing some of the Pokeapi endpoints",
   "author": "Edward Jibson",
   "private": true,
