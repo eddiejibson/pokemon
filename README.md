@@ -32,4 +32,5 @@ npm run dev
 
 # Or, in production
 npm run build
+npm run start
 ```
