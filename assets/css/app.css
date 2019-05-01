@@ -285,6 +285,11 @@ h1,
   background-color: #222226;
 }
 
+.ghost {
+  background: #fff;
+  color: #333;
+}
+
 .full-bar {
   height: 100%;
   background-color: #222226;

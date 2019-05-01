@@ -23,7 +23,15 @@ export default {
     arrow,
     trash
   },
-  props: ["name", "index"],
+  props: {
+    name: String,
+    index: Number,
+    favourite: {
+      //Should send query param to advanced card where from so instead of "back to browse", you can go back to favourite list instead
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       thumbIndex: "001"
@@ -31,6 +39,9 @@ export default {
   },
   methods: {
     travel(destination) {
+      if (this.favourite) {
+        destination += "?from=favourites";
+      }
       this.$router.push(destination);
     }
   },

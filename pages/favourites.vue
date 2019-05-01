@@ -13,20 +13,12 @@
           :key="index"
           :index="parseInt(index)"
           :name="pokemon.name"
+          favourite
         />
       </div>
-      <div
-        class="row"
-        id="showIfLoadingRequest"
-        style="margin-left: 5px;
-margin-right: 5px;margin-bottom:10px;display:none"
-      >
-        <div class="card" style="width:100%;">
-          <Loading msg="Loading More Pokemons..." />
-        </div>
-      </div>
-    </div></div
-></template>
+    </div>
+  </div>
+</template>
 
 <script>
 import pokemonCard from "~/components/pokemonCard.vue";
