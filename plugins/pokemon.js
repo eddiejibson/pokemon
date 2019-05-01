@@ -50,21 +50,25 @@ export const saveFavourite = ({
     }
     favourites.push(obj);
     localStorage.setItem("favourites", JSON.stringify(favourites));
-    return {
-      success: true
-    }
   } else if (!favourites[0][index]) {
     favourites[0][index] = {
       name: name
     };
     localStorage.setItem("favourites", JSON.stringify(favourites));
-    return {
-      success: true
+  }
+}
+
+export const removeFavourite = ({
+  id
+}) => {
+  let index = String(id);
+  let favourites = getFavourites() || [];
+  if (favourites.length > 0) {
+    console.log(favourites[0][index]);
+    if (favourites[0][index]) {
+      delete favourites[0][index];
     }
-  } else {
-    return {
-      error: "You've already saved this Pokémon to your favourites!"
-    }
+    localStorage.setItem("favourites", JSON.stringify(favourites));
   }
 }
 
@@ -76,6 +80,7 @@ vue.use((vm) => {
   vm.prototype.$getThumbIndex = getThumbIndex;
   vm.prototype.$getFavourites = getFavourites;
   vm.prototype.$saveFavourite = saveFavourite;
+  vm.prototype.$removeFavourite = removeFavourite;
 });
 
 export default ({

@@ -71,9 +71,36 @@
               ><shuffle w="14" h="14" rootClass="option-icon" />
               <p>Compare with another Pokemon</p></span
             >
-            <span class="row reverse option bottom" @click="favourite()">
+            <span
+              class="row reverse option bottom"
+              id="addToFavourite"
+              @click="favourite"
+            >
               <heart w="14" h="14" rootClass="option-icon" />
               <p>Add to your favourites</p>
+            </span>
+            <span
+              class="row reverse option bottom"
+              style="display:none;"
+              id="addedToFavouriteSuccess"
+            >
+              <tick w="14" h="14" rootClass="option-icon" />
+              <p>Added to your favourites</p>
+            </span>
+            <span
+              class="row reverse option bottom"
+              style="display:none;"
+              @click="removeFavourite"
+              id="addedToFavourite"
+            >
+              <!-- This time I didn't want to just keep repeating showing and hiding an element, so it will dynamically change the text and show/hide the trash icon -->
+              <trash
+                w="14"
+                h="14"
+                rootClass="option-icon"
+                v-if="removalStatus.clicks == 0"
+              />
+              <p>{{ removalStatus.text }}</p>
             </span>
           </div>
         </div>
@@ -86,18 +113,57 @@
 import arrow from "vue-ionicons/dist/md-arrow-back.vue";
 import shuffle from "vue-ionicons/dist/md-shuffle.vue";
 import heart from "vue-ionicons/dist/md-heart.vue";
+import tick from "vue-ionicons/dist/md-checkmark.vue";
+import trash from "vue-ionicons/dist/md-trash.vue";
 export default {
   components: {
     arrow,
     shuffle,
-    heart
+    heart,
+    tick,
+    trash
   },
   methods: {
     travel(destination) {
       this.$router.push(destination);
     },
+    //Is method because I'm calling both if the user clicks to add or if it has already been added
+    showAddedToFavourite(showSuccess = true) {
+      //Again, I'm aware I could use v-if, just wanted to show  I can manipulate the DOM in vanilla javascript and without the use of a framework.
+      document.getElementById("addToFavourite").style.display = "none";
+      if (showSuccess) {
+        document.getElementById("addedToFavouriteSuccess").style.display =
+          "flex";
+        setTimeout(() => {
+          document.getElementById("addedToFavouriteSuccess").style.display =
+            "none";
+          document.getElementById("addedToFavourite").style.display = "flex";
+        }, 2000);
+      } else {
+        document.getElementById("addedToFavourite").style.display = "flex";
+      }
+    },
     favourite() {
       this.$saveFavourite(this.pokemon);
+      this.showAddedToFavourite();
+    },
+    removeFavourite() {
+      if (this.removalStatus.clicks == 0) {
+        this.removalStatus.text = "Are you sure?";
+        this.removalStatus.clicks = 1;
+        setTimeout(() => {
+          this.removalStatus.text = "Remove from your favourites";
+          this.removalStatus.clicks = 0;
+        }, 2500); //Don't want to show this forever (could have been clicked by accident)
+      } else if (this.removalStatus.clicks == 1) {
+        //User has confirmed they want to remove a Pokemon
+        this.$removeFavourite(this.pokemon);
+        this.removalStatus.text = "Removed.";
+        setTimeout(() => {
+          document.getElementById("addedToFavourite").style.display = "none";
+          document.getElementById("addToFavourite").style.display = "flex";
+        }, 1500);
+      }
     }
   },
   //I have the params key passed here, too. This way I can extract the ID from the URL.
@@ -113,7 +179,8 @@ export default {
       return {
         pokemon: false,
         thumbIndex: null,
-        error: true
+        error: true,
+        removalStatus: null
       };
     } else {
       let pokemon = res.data;
@@ -129,8 +196,22 @@ export default {
       return {
         pokemon: pokemon,
         thumbIndex: app.$getThumbIndex(params.id),
-        error: false
+        error: false,
+        removalStatus: { text: "Remove from your favourites", clicks: 0 } //1 is asked to remove, 2 is has confirmed removal so do it.
       };
+    }
+  },
+  mounted() {
+    if (this.pokemon && !this.error) {
+      //Make sure the pokemon has loaded
+      let favourites = this.$getFavourites(); //Get favourites from localStorage
+      if (favourites) {
+        favourites = favourites[0];
+        if (favourites[this.pokemon.id]) {
+          //If ID exists, the user has saved it to their favourites. Reflect this in the UI. Do not show the success "added to your favourites" - so pass in false.
+          this.showAddedToFavourite(false);
+        }
+      }
     }
   },
   head() {

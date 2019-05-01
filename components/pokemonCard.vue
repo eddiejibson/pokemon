@@ -16,10 +16,12 @@
 <script>
 import addCircle from "vue-ionicons/dist/md-add-circle-outline.vue";
 import arrow from "vue-ionicons/dist/md-arrow-forward.vue";
+import trash from "vue-ionicons/dist/md-trash.vue";
 export default {
   components: {
     addCircle,
-    arrow
+    arrow,
+    trash
   },
   props: ["name", "index"],
   data() {

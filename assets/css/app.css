@@ -17,6 +17,19 @@ body {
   width: 50%;
 }
 
+@media only screen and (max-width: 600px) {
+  .stretch {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .stretch {
+    width: 98% !important;
+  }
+}
+
+
 [data-tooltip] {
   position: relative;
 }
@@ -264,6 +277,10 @@ h1,
   background-color: #ff9a0c;
 }
 
+.bug {
+  background-color: #40407a;
+}
+
 .normal {
   background-color: #222226;
 }
@@ -314,6 +331,7 @@ h1,
 .above-card p {
   margin: 0;
 }
+
 
 
 .row .reverse {

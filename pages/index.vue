@@ -5,7 +5,7 @@
       <h1 class="center-text">PokéAPI UI</h1>
     </div>
 
-    <div class="inner-container">
+    <div class="inner-container stretch">
       <div class="search row">
         <searchIcon rootClass="icon" h="20" w="20" />
         <input type="text" placeholder="Search by a Pokemon's name or ID" />
