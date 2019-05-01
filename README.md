@@ -19,3 +19,15 @@ There is only one plugin that is being used:
 `plugins/pokemon.js` - This was obviouisly self-written to handle API requests properly and perform other various interactions that may be required globally (e.g setting & getting data from localstorage e.t.c).
 
 
+## Running yourself
+
+```bash
+# Install dependencies
+npm install
+
+# Run in developer mode
+npm run dev
+
+# Or, in production
+npm run build
+```

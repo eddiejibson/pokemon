@@ -16,17 +16,35 @@ body {
   width: 50%;
 }
 
+
+@media only screen and (max-width: 1600px) {
+  .stretch {
+    width: 60% !important;
+  }
+}
+
+
+@media only screen and (max-width: 1300px) {
+  .stretch {
+    width: 70% !important;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .stretch {
-    width: 80% !important;
+    width: 85% !important;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .stretch {
-    width: 98% !important;
+    width: 99% !important;
   }
 }
+
+
+
+
 
 .container {
   display: flex;
@@ -309,5 +327,9 @@ h1,
 
 
 .info-container {
+  width: 100%;
+}
+
+form {
   width: 100%;
 }
