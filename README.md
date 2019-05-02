@@ -4,7 +4,7 @@
 
 [Live version here](https://pokemon.jibson.me)
 
-For this project, I used [NuxtJS](https://nuxtjs.org/) which is effectively VueJS with added features such as Server Side Rendering which is handy for SEO purposes. I made sure to also use vanilla Javascript in manipulating the DOM - to prove I'm not limited just to Vue. This may have looked strange in some places as it wasn't needed, but there was a reason behind it. The only other dependencies used were [Axios](https://github.com/axios/axios) which was used for retrieving data from the API endpoints provided (I'm aware I could have used vanilla XHR within JavaScript, but chose this simply for ease) and [Ionicons](https://ionicons.com/) which isn't a library as such and basically provides the SVG icons I used. **No CSS frameworks have been used at all**.
+For this project, I used [NuxtJS](https://nuxtjs.org/) which is effectively VueJS with added features such as Server Side Rendering which is handy for SEO purposes. I made sure to also use vanilla Javascript in manipulating the DOM - to prove I'm not limited just to Vue. This may have looked strange in some places or inconsistent as it wasn't needed, but this is the reason behind it. The only other dependencies used were [Axios](https://github.com/axios/axios) which was used for retrieving data from the API endpoints provided (I'm aware I could have used vanilla XHR within JavaScript, but chose this simply for ease) and [Ionicons](https://ionicons.com/) which isn't a library as such and basically provides the SVG icons I used. **No CSS frameworks have been used at all**.
 
 ## Pages
 
@@ -18,7 +18,7 @@ For this project, I used [NuxtJS](https://nuxtjs.org/) which is effectively VueJ
 
 There is only one plugin that is being used:
 
-`plugins/pokemon.js` - This was obviouisly self-written to handle API requests properly and perform other various interactions that may be required globally (e.g setting & getting data from localstorage e.t.c).
+`plugins/pokemon.js` - This was obviouisly self-written to handle API requests properly and perform other various functions that may be required globally (e.g setting & getting data from localstorage e.t.c).
 
 
 ## Running yourself

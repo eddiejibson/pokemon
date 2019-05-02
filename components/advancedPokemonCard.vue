@@ -115,7 +115,12 @@ export default {
   },
   data() {
     return {
-      removalStatus: { text: "Remove from your favourites", clicks: 0 } //1 is asked to remove, 2 is has confirmed removal so do it.
+      removalStatus: { text: "Remove from your favourites", clicks: 0 }, //1 is asked to remove, 2 is has confirmed removal so do it.
+      timeout: {
+        favouriteSuccess: null,
+        removalConfirm: null,
+        removalSuccess: null
+      } //So I can reset a timeout (e.g doesn't keep being added)
     };
   },
   methods: {
@@ -129,12 +134,19 @@ export default {
       if (showSuccess) {
         document.getElementById("addedToFavouriteSuccess").style.display =
           "flex";
-        setTimeout(() => {
+        if (this.timeout.favouriteSuccess) {
+          clearTimeout(this.timeout.favouriteSuccess);
+        }
+        this.timeout.favouriteSuccess = setTimeout(() => {
           document.getElementById("addedToFavouriteSuccess").style.display =
             "none";
+          document.getElementById("addToFavourite").style.display = "none";
           document.getElementById("addedToFavourite").style.display = "flex";
         }, 2000);
       } else {
+        document.getElementById("addedToFavouriteSuccess").style.display =
+          "none";
+        document.getElementById("addToFavourite").style.display = "none";
         document.getElementById("addedToFavourite").style.display = "flex";
       }
     },
@@ -144,9 +156,12 @@ export default {
     },
     removeFavourite() {
       if (this.removalStatus.clicks == 0) {
+        if (this.timeout.removalConfirm) {
+          clearTimeout(this.timeout.removalConfirm);
+        }
         this.removalStatus.text = "Are you sure? (click)";
         this.removalStatus.clicks = 1;
-        setTimeout(() => {
+        this.timeout.removalConfirm = setTimeout(() => {
           this.removalStatus.text = "Remove from your favourites";
           this.removalStatus.clicks = 0;
         }, 2500); //Don't want to show this forever (could have been clicked by accident)
@@ -154,8 +169,13 @@ export default {
         //User has confirmed they want to remove a Pokemon
         this.$removeFavourite(this.pokemon);
         this.removalStatus.text = "Removed.";
-        setTimeout(() => {
+        if (this.timeout.removalSuccess) {
+          clearTimeout(this.timeout.removalSuccess);
+        }
+        this.timeout.removalSuccess = setTimeout(() => {
           document.getElementById("addedToFavourite").style.display = "none";
+          document.getElementById("addedToFavouriteSuccess").style.display =
+            "none";
           document.getElementById("addToFavourite").style.display = "flex";
         }, 1500);
       }
