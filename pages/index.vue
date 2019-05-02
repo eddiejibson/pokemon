@@ -115,6 +115,16 @@ export default {
         this.isSearching = false;
       }
     },
+    onScroll() {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+        !this.error
+      ) {
+        //I'm aware I can use v-if, I just wanted to demonstrate I can use vanilla javascript, too.
+        document.getElementById("showIfLoadingRequest").style.display = "flex";
+        this.loadMoreResults();
+      }
+    },
     searchSubmit(e) {
       e.preventDefault();
       this.travel(`/pokemon/${this.searchQuery}`);
@@ -154,17 +164,8 @@ export default {
   },
   mounted() {
     document.getElementById("showIfLoadingRequest").style.display = "none";
-    var self = this; //Apparently I can't allow this inside another function
-    window.onscroll = function(ev) {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-        !this.error
-      ) {
-        //I'm aware I can use v-if, I just wanted to demonstrate I can use vanilla javascript, too.
-        document.getElementById("showIfLoadingRequest").style.display = "flex";
-        self.loadMoreResults();
-      }
-    };
+    window.addEventListener("scroll", this.onScroll);
+    document.body.addEventListener("touchmove", this.onScroll);
   }
 };
 </script>
